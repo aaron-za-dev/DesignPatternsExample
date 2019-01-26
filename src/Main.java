@@ -19,6 +19,7 @@ public class Main {
                     "1.- Patron Singleton \n" +
                     "2.- Patron Fabrica \n" +
                     "3.- Patron Fabrica Abstracta \n" +
+                    "4.- Patron Prototipo"+
                     "0.- Salir de la aplicacion"));
 
             switch (option){
@@ -135,6 +136,8 @@ public class Main {
         //Detenemos ambos vehiculos terrestres
         myCar.Stop();
         myBike.Stop();
+
+
 
 
     }
