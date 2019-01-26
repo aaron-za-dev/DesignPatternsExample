@@ -1,3 +1,6 @@
+import AbstractFactory.AbstractFactory;
+import AbstractFactory.FactoryProducer;
+import AbstractFactory.Vehicle;
 import Factory.ISocialNetwork;
 import Factory.SocialNetworkFactory;
 import Singleton.MyConnection;
@@ -15,13 +18,16 @@ public class Main {
             option = Integer.parseInt(JOptionPane.showInputDialog("Seleccione una opcion: \n" +
                     "1.- Patron Singleton \n" +
                     "2.- Patron Fabrica \n" +
+                    "3.- Patron Fabrica Abstracta \n" +
                     "0.- Salir de la aplicacion"));
 
             switch (option){
 
                 case 1: RunSingletonPattern(); break;
                 case 2: RunFactoryPattern() ;
+                case 3: RunAbstractFactoryPattern(); break;
                 case 0: break;
+                default: JOptionPane.showMessageDialog(null, "Debe seleccionar una opcion valida"); break;
             }
 
 
@@ -84,5 +90,54 @@ public class Main {
         System.out.println("--------------------------------------------------------------");
 
     }
+
+    private static void RunAbstractFactoryPattern(){
+
+        //Cabecera Vehiculos Aereos
+        System.out.println("********************** Vehiculos Aereos ************************ \n");
+
+        //Creamos una fabrica que fabrica fabricas de vehiculos aereos
+        AbstractFactory avf = FactoryProducer.getFactory("AirVehicleFactory");
+        //Creamos un avion (de tipo vehiculo) que fabrico la fabrica de vehiculos aereos
+        Vehicle myAirPlane = avf.getVehicle("AirPlane");
+        //Cabecera del avion
+        System.out.println("------- Mi Avion -------");
+        //Se pone en movimiento el avion
+        myAirPlane.Move(1000f);
+
+        //Creamos un cohete espacial (de tipo vehiculo) que fabrico la fabrica de vehiculos aereos
+        Vehicle myRocket = avf.getVehicle("SpaceRocket");
+        //Cabecera del cohete espacial
+        System.out.println("------- Mi Cohete Espacial -------");
+        //Se pone en movimiento el cohete
+        myRocket.Move(350000);
+        //Detenemos ambos vehiculos aereos
+        myAirPlane.Stop();
+        myRocket.Stop();
+
+        //Cabecera Vehiculos Aereos
+        System.out.println("********************** Vehiculos Terrestres ************************ \n");
+        //Creamos una fabrica que fabrica fabricas de vehiculos terrestres
+        AbstractFactory lvf = FactoryProducer.getFactory("LandVehicleFactory");
+        //Creamos un carro (de tipo vehiculo) que fabrico la fabrica de vehiculos terrestres
+        Vehicle myCar = lvf.getVehicle("Car");
+        //Cabecera del carro
+        System.out.println("------- Mi Carro -------");
+        //Se pone en movimiento el carro
+        myCar.Move(90);
+
+        //Creamos una bicicleta (de tipo vehiculo) que fabrico la fabrica de vehiculos terrestres
+        Vehicle myBike = lvf.getVehicle("Bike");
+        //Cabecera de la bicicleta
+        System.out.println("------- Mi Bicicleta -------");
+        //Se pone en movimiento la bicicleta
+        myBike.Move(10);
+        //Detenemos ambos vehiculos terrestres
+        myCar.Stop();
+        myBike.Stop();
+
+
+    }
+
 
 }
