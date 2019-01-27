@@ -1,6 +1,5 @@
 /.idea
-.iml
-/out
+DesignPatternsExample.iml
 
 # Compiled class file
 *.class

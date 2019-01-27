@@ -19,7 +19,7 @@ public class Main {
                     "1.- Patron Singleton \n" +
                     "2.- Patron Fabrica \n" +
                     "3.- Patron Fabrica Abstracta \n" +
-                    "4.- Patron Prototipo"+
+                    "4.- Patron Facade"+
                     "0.- Salir de la aplicacion"));
 
             switch (option){
