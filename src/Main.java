@@ -1,6 +1,7 @@
 import AbstractFactory.AbstractFactory;
 import AbstractFactory.FactoryProducer;
 import AbstractFactory.Vehicle;
+import Facade.PostMaker;
 import Factory.ISocialNetwork;
 import Factory.SocialNetworkFactory;
 import Singleton.MyConnection;
@@ -19,7 +20,7 @@ public class Main {
                     "1.- Patron Singleton \n" +
                     "2.- Patron Fabrica \n" +
                     "3.- Patron Fabrica Abstracta \n" +
-                    "4.- Patron Facade"+
+                    "4.- Patron Fachada \n" +
                     "0.- Salir de la aplicacion"));
 
             switch (option){
@@ -27,6 +28,9 @@ public class Main {
                 case 1: RunSingletonPattern(); break;
                 case 2: RunFactoryPattern() ;
                 case 3: RunAbstractFactoryPattern(); break;
+                case 4:
+                    RunFacadePattern();
+                    break;
                 case 0: break;
                 default: JOptionPane.showMessageDialog(null, "Debe seleccionar una opcion valida"); break;
             }
@@ -137,10 +141,29 @@ public class Main {
         myCar.Stop();
         myBike.Stop();
 
+    }
 
+    private static void RunFacadePattern() {
 
+        //Creamos una nueva instancia del Elaborador De publicaciones para acceder a los distintos tipos de publicaciones
+        PostMaker pm = new PostMaker();
+
+        System.out.println("***** Facebook *****");
+        //Publicacion de estado y fotografia en facebook
+        pm.UpdateStatusOnFacebook("Probando el patron fachada");
+        pm.UploadPictureToFacebook("#Selfie! :D", "img/00/00/1/!.jpg");
+
+        System.out.println("***** Twitter *****");
+        //Publicacion de estado y fotografia en twitter
+        pm.UpdateStatusOnTwitter("Estamos probando el patron fachada... :D");
+        pm.UploadPictureToTwitter("De Viaje!..", "img/01/02/5/!.jpg");
+
+        System.out.println("***** Instagram *****");
+        //Publicacion imagen en Instagram
+        pm.UploadPictureToInstagram("Mi desayuno!..", "img/02/03/6/!.jpg");
 
     }
+
 
 
 }

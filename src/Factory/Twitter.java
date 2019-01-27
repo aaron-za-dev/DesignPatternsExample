@@ -22,7 +22,6 @@ public class Twitter implements ISocialNetwork {
 
         }
 
-
     }
 
     @Override
