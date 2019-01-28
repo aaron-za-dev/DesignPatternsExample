@@ -4,6 +4,10 @@ import AbstractFactory.Vehicle;
 import Facade.PostMaker;
 import Factory.ISocialNetwork;
 import Factory.SocialNetworkFactory;
+import Observer.ChatRoom;
+import Observer.ClientChatOne;
+import Observer.ClientChatThree;
+import Observer.ClientChatTwo;
 import Singleton.MyConnection;
 
 import javax.swing.*;
@@ -21,15 +25,21 @@ public class Main {
                     "2.- Patron Fabrica \n" +
                     "3.- Patron Fabrica Abstracta \n" +
                     "4.- Patron Fachada \n" +
+                    "5.- Patron Observador \n" +
                     "0.- Salir de la aplicacion"));
 
             switch (option){
 
                 case 1: RunSingletonPattern(); break;
-                case 2: RunFactoryPattern() ;
+                case 2:
+                    RunFactoryPattern();
+                    break;
                 case 3: RunAbstractFactoryPattern(); break;
                 case 4:
                     RunFacadePattern();
+                    break;
+                case 5:
+                    RunObserverPattern();
                     break;
                 case 0: break;
                 default: JOptionPane.showMessageDialog(null, "Debe seleccionar una opcion valida"); break;
@@ -161,6 +171,28 @@ public class Main {
         System.out.println("***** Instagram *****");
         //Publicacion imagen en Instagram
         pm.UploadPictureToInstagram("Mi desayuno!..", "img/02/03/6/!.jpg");
+
+    }
+
+
+    private static void RunObserverPattern() {
+
+        //Se crea la sala de chat como el sujeto a observar
+        ChatRoom subject = new ChatRoom();
+
+        //Se crean tres observadores y se les envia la sala de chat
+        //a la cual se van a suscribir
+        new ClientChatOne(subject);
+        new ClientChatTwo(subject);
+        new ClientChatThree(subject);
+
+
+        System.out.println("Enviando mensaje inicial...");
+
+        //actualizamos el ultimo estado del sujeto observado, en la consola se mostrara
+        //la actualizacion de cada observador
+        subject.setLastMessage("Bienveido a la sala");
+
 
     }
 
