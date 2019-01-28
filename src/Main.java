@@ -1,6 +1,9 @@
 import AbstractFactory.AbstractFactory;
 import AbstractFactory.FactoryProducer;
 import AbstractFactory.Vehicle;
+import DAO.User;
+import DAO.UserDAO;
+import DAO.UserDAOImpl;
 import Facade.PostMaker;
 import Factory.ISocialNetwork;
 import Factory.SocialNetworkFactory;
@@ -11,6 +14,7 @@ import Observer.ClientChatTwo;
 import Singleton.MyConnection;
 
 import javax.swing.*;
+import java.util.List;
 
 public class Main {
 
@@ -26,23 +30,34 @@ public class Main {
                     "3.- Patron Fabrica Abstracta \n" +
                     "4.- Patron Fachada \n" +
                     "5.- Patron Observador \n" +
+                    "6.- Patron DAO \n" +
                     "0.- Salir de la aplicacion"));
 
-            switch (option){
+            switch (option) {
 
-                case 1: RunSingletonPattern(); break;
+                case 1:
+                    RunSingletonPattern();
+                    break;
                 case 2:
                     RunFactoryPattern();
                     break;
-                case 3: RunAbstractFactoryPattern(); break;
+                case 3:
+                    RunAbstractFactoryPattern();
+                    break;
                 case 4:
                     RunFacadePattern();
                     break;
                 case 5:
                     RunObserverPattern();
                     break;
-                case 0: break;
-                default: JOptionPane.showMessageDialog(null, "Debe seleccionar una opcion valida"); break;
+                case 6:
+                    RunDAOPattern();
+                    break;
+                case 0:
+                    break;
+                default:
+                    JOptionPane.showMessageDialog(null, "Debe seleccionar una opcion valida");
+                    break;
             }
 
 
@@ -192,6 +207,29 @@ public class Main {
         //actualizamos el ultimo estado del sujeto observado, en la consola se mostrara
         //la actualizacion de cada observador
         subject.setLastMessage("Bienveido a la sala");
+
+
+    }
+
+    private static void RunDAOPattern() {
+
+        //Se crea una instancia de la implemantacion del UserDAO
+        UserDAO impl = new UserDAOImpl();
+
+        //Agregamos un usuario
+        impl.AddUser(new User(4, "Maria", "******"));
+
+        //Eliminamos un usuario por su id
+        impl.DeleteUser(2);
+
+        //Obtenemos un usuario por su id y mostramos el estado de sus atributos
+        User u = impl.GetUserById(3);
+        System.out.println("Usuario Obtenido: ID: " + u.getUserID() + " Nombre: " + u.getName());
+
+        //Mostramos todos los usuarios que estan actualmente en la lista
+        System.out.println("Mostrando todos los usuarios");
+        List<User> allUsers = impl.GetAllUsers();
+        allUsers.forEach(x -> System.out.println("ID: " + x.getUserID() + " Nombre: " + x.getName()));
 
 
     }
